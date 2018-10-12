@@ -7,6 +7,7 @@
 To open app:
 
 * install all project dependencies with `npm install`
+* install the react router with `npm install react-router-dom`
 * start the development server with `npm start`
 
 ## Bookshelf
