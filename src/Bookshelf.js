@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 
 class Bookshelf extends Component {
-	state = {
-		shelves: [
+	constructor (props) {
+    	super(props)
+    	this.shelves = [
 			{id:'currentlyReading', text: 'Currently Reading'},
 			{id:'wantToRead', text:'Want to Read'},
-			{id:'read', text: 'Read'} 
+			{id:'read', text: 'Read'}
 		]
-	}
-
+		
+  	}
 	componentDidUpdate(prevProps){
 		if(prevProps === this.props){
 			console.log('Updated')
@@ -19,7 +20,7 @@ class Bookshelf extends Component {
 
 	thumbnail = (book) => {
 		if(!book.hasOwnProperty('imageLinks')){
-			return { width: 128, height: 192, backgroundImage: `url('')`}
+			return { width: 128, height: 192}
 		}else{
 			return { width: 128, height: 192, backgroundImage: `url(${book.imageLinks.thumbnail})`}
 		}
@@ -33,7 +34,7 @@ class Bookshelf extends Component {
 	            </div>
 	            <div className="list-books-content">
 	              <div>
-	              	{this.state.shelves.map((category) =>
+	              	{this.shelves.map((category) =>
 						<div className="bookshelf" key={category.id}>
 			                <h2 className="bookshelf-title">{category.text}</h2>
 			                <div className="bookshelf-books">

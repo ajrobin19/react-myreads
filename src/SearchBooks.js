@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
+import {DebounceInput} from 'react-debounce-input'
 
 class SearchBooks extends Component {
 
 	thumbnail = (book) => {
 		if(!book.hasOwnProperty('imageLinks')){
-			return { width: 128, height: 192, backgroundImage: `url('../public/missingBook.jpg')`}
+			return { width: 128, height: 192}
 		}else{
 			return { width: 128, height: 192, backgroundImage: `url(${book.imageLinks.thumbnail})`}
 		}
@@ -24,7 +25,7 @@ class SearchBooks extends Component {
 		return(
 			<div className="search-books">
 			  <div className="search-books-bar">
-			    <Link className='close-search' to='/'>Close</Link>
+			    <Link className='close-search' to='/' onClick={() => this.props.currentResults = ''}>Close</Link>
 			    <div className="search-books-input-wrapper">
 			      {/*
 			        NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -34,7 +35,7 @@ class SearchBooks extends Component {
 			        However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
 			        you don't find a specific author or title. Every search is limited by search terms.
 			      */}
-			      <input type="text" placeholder="Search by title or author" onChange={(e) => this.props.searchUpdate(e)}/>
+			      <DebounceInput type="text" minLength={1} debounceTimeout={500} placeholder="Search by title or author" onChange={(e) => this.props.searchUpdate(e)}/>
 			    </div>
 			  </div>
 			  <div className="search-books-results">
@@ -56,7 +57,7 @@ class SearchBooks extends Component {
 		                            	</div>
 		                          	</div>
 		                          	<div className="book-title">{book.title}</div>
-		                          	<div className="book-authors">{book.authors}</div>
+		                          	<div className="book-authors">{book.authors ? book.authors.join(', ') : ''}</div>
 		                        </div>
 		                    </li>
 		                )

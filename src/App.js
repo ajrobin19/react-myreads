@@ -18,11 +18,11 @@ class BooksApp extends React.Component {
   }
 
   updateLibrary = (book, e) => {
-    BooksAPI.update(book, e.target.value).then(
-      BooksAPI.getAll().then((returns) => {
+    BooksAPI.update(book, e.target.value).then(() => {
+        BooksAPI.getAll().then((returns) => {
         this.setState(() =>({books: returns}))
       })
-    )
+    })
   }
 
   searchUpdate = (e) => {

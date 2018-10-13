@@ -8,7 +8,9 @@ To open app:
 
 * install all project dependencies with `npm install`
 * install the react router with `npm install react-router-dom`
+* install the debounce dependency for text areas with `npm install --save react react-debounce-input`
 * start the development server with `npm start`
+
 
 ## Bookshelf
 The root page in the application is your book shelf. You can make books around from one shelf to another by clicking the green drop down menu on the book and selecting where you would like the book to be moved to. If none is selected, the book will be removed from your bookshelf.
